@@ -12,6 +12,7 @@ import csv
 import os
 
 file_to_load = os.path.join('Election_Analysis','Recources','election_results.csv')
+file_to_save = os.path.join('Election_Analysis','Analysis','election_results.txt')
 
 #Initialize the vote count at 0
 total_votes = 0
@@ -53,49 +54,47 @@ with open(file_to_load) as election_data:
         #add to that candidate's votes
         candidate_votes[candidate_name] += 1
 
-#Iterate through the candidate names
-for candidate_name in candidate_votes:
+with open(file_to_save,'w') as txt_file:
 
-    #Retrieve voter count for each candidate
-    votes = candidate_votes[candidate_name]
+    election_results =(
+        f'Election Results\n'
+        f'-------------------------\n'
+        f'Total Votes: {total_votes:,}\n'
+        f'-------------------------\n'
+    )
 
-    #calculate the % votes
-    vote_percentage = float(votes)/float(total_votes)*100
+    print(election_results,end='')
 
-    #print the vote %
-    #print(f'{candidate_name}: received {vote_percentage:.1f}% of the vote.')
+    txt_file.write(election_results)
 
-    #to do: print out each candidate's name, vote count, and percent of votes to the terminal
-    print(f'{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n')
-    #Determine winning vote count and candidate
+    #Iterate through the candidate names
+    for candidate_name in candidate_votes:
 
-    #Determine if vote count is greater than the winning count
-    if (votes > winning_count) and (vote_percentage > winning_percentage):
-        winning_count = votes
-        winning_percentage = vote_percentage
-        winning_candidate = candidate_name
+        #Retrieve voter count for each candidate
+        votes = candidate_votes[candidate_name]
 
-winning_candidate_summary = (
-    f'-------------------------\n'
-    f'Winner: {winning_candidate}\n'
-    f'Winning Vote Count: {winning_count:,}\n'
-    f'Winning Percentage: {winning_percentage:.1f}%\n'
-    f'-------------------------\n'
-)
+        #calculate the % votes
+        vote_percentage = float(votes)/float(total_votes)*100
 
-print(winning_candidate_summary)
-    
+        #print the vote %
+        #print(f'{candidate_name}: received {vote_percentage:.1f}% of the vote.')
 
+        #to do: print out each candidate's name, vote count, and percent of votes to the terminal
+        #print(f'{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n')
+        #Determine winning vote count and candidate
 
+        #Determine if vote count is greater than the winning count
+        if (votes > winning_count) and (vote_percentage > winning_percentage):
+            winning_count = votes
+            winning_percentage = vote_percentage
+            winning_candidate = candidate_name
 
+    winning_candidate_summary = (
+        f'-------------------------\n'
+        f'Winner: {winning_candidate}\n'
+        f'Winning Vote Count: {winning_count:,}\n'
+        f'Winning Percentage: {winning_percentage:.1f}%\n'
+        f'-------------------------\n'
+    )
 
-#Create filename variable to a direct or indirect path to the file
-file_to_save = os.path.join('Election_Analysis','Analysis','election_results.txt')
-#use the open statement to open the file as writeable
-with open(file_to_save,'w') as txtfile:
-
-#Write some data to the file
-
-    txtfile.write('Counties in the Election\n')
-    txtfile.write('------------------------\n')    
-    txtfile.write('Arapahoe\nDenver\nJefferson')
+    #print(winning_candidate_summary)
