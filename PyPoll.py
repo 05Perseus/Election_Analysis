@@ -11,8 +11,11 @@
 import csv
 import os
 
-file_to_load = os.path.join('Election_Analysis','Recources','election_results.csv')
-file_to_save = os.path.join('Election_Analysis','Analysis','election_results.txt')
+#file_to_load = os.path.join('Election_Analysis','Recources','election_results.csv')
+#file_to_save = os.path.join('Election_Analysis','Analysis','election_results.txt')
+
+file_to_load = 'C:/Users/Admin/Documents/Data Camp Work/Week 3/Election_Analysis/Recources/election_results.csv'
+file_to_save = 'C:/Users/Admin/Documents/Data Camp Work/Week 3/Election_Analysis/Analysis/election_results.txt'
 
 #Initialize the vote count at 0
 total_votes = 0
@@ -102,7 +105,7 @@ with open(file_to_save,'w') as txt_file:
         #to do: print out each candidate's name, vote count, and percent of votes to the terminal
         county_results = (f'{county_name}: {county_vote_percentage:.1f}% ({cty_votes:,})\n')
 
-        print(county_results)
+        print(county_results,end='')
 
         txt_file.write(county_results)
         #Determine winning vote count and candidate
@@ -119,7 +122,7 @@ with open(file_to_save,'w') as txt_file:
     f'-------------------------\n'
     )
 
-    print(winning_county_summary)
+    print(winning_county_summary,end='')
     txt_file.write(winning_county_summary)
 
 
@@ -138,7 +141,7 @@ with open(file_to_save,'w') as txt_file:
         #to do: print out each candidate's name, vote count, and percent of votes to the terminal
         candidate_results = (f'{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n')
 
-        print(candidate_results)
+        print(candidate_results,end='')
 
         txt_file.write(candidate_results)
         #Determine winning vote count and candidate
@@ -158,5 +161,5 @@ with open(file_to_save,'w') as txt_file:
         f'-------------------------\n'
     )
 
-    print(winning_candidate_summary)
+    print(winning_candidate_summary,end='')
     txt_file.write(winning_candidate_summary)
